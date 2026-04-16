@@ -20,7 +20,7 @@ Throughout this project, I was actively involved in both the technical implement
 
 ### Workflow Adaptation
 
-A key contribution I made to this project was adapting the workflow to address hardware limitations. Since my laptop only supports CPU-based processing, training the YOLO model locally was extremely slow and not practical for the scope of this project. To resolve this, I transitioned the training process to Google Colab, where I could take advantage of GPU acceleration. This shift was essential for efficiently completing Part III (training) and Part IV (evaluation and prediction).
+A key contribution I made to this project was adapting the workflow to address hardware limitations. Since my laptop only supports CPU-based processing, training the YOLO model locally was extremely slow and not practical for the scope of this project. To resolve this, I transitioned the training process to Google Collab, where I could take advantage of GPU processing. This shift was essential for efficiently completing Part III (training) and Part IV (evaluation and prediction).
 
 ---
 
@@ -30,7 +30,7 @@ The project involved several practical and technical challenges:
 
 ### Hardware Limitations
 - Local CPU training was too slow for deep learning workloads  
-- Required migration to Google Colab for GPU acceleration  
+- Required migration to Google Collab for GPU acceleration  
 
 ### Environment Transition Issues
 - File path inconsistencies between Windows and Linux systems  
