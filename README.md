@@ -1,8 +1,6 @@
 # YOLO-Advanced-Object-Detection-Model
 You Only Look For Once is an interative model that uses deep learning features to detect objects, a vital simulation used in smart cities
 
-# YOLO Object Detection Project (VisDrone)
-
 ## Overview
 This project implements a YOLOv8-based object detection model trained on the VisDrone dataset. The goal is to evaluate model performance under different training configurations and understand how factors such as training duration and image resolution impact detection accuracy in dense, real-world environments.
 
@@ -168,20 +166,31 @@ To place the final YOLOv11n model in a broader context, a comparative evaluation
 
 ### Quantitative Comparison Table
 
-| Model    | Precision | Recall | mAP50 | mAP50-95 | Model Size | Training Time | Inference Speed | Notes |
-|----------|-----------|--------|-------|----------|------------|---------------|-----------------|-------|
-| YOLOv5n  | 0.401     | 0.322  | 0.336 | 0.189    | Very small | Fast          | Very fast       | Lightweight baseline, weaker small-object performance |
-| YOLOv8n  | 0.446     | 0.351  | 0.362 | 0.211    | Small      | Fast          | Fast            | Strong efficiency, moderate improvement over YOLOv5n |
-| YOLOv9t  | 0.458     | 0.364  | 0.371 | 0.219    | Small-Med  | Moderate      | Moderate        | Better localization and recall than earlier lightweight models |
-| YOLOv11n | 0.472     | 0.373  | 0.378 | 0.224    | Small      | Moderate      | Fast            | Final project model, best overall result in this study |
 
-The comparison suggests that YOLOv11n provided the strongest overall performance among the models considered, achieving the highest precision, recall, mAP50, and mAP50-95. This indicates that YOLOv11n was better able to balance object classification and localization accuracy within the challenging VisDrone dataset.
+| Model               | Version | Precision   | Recall      | mAP50       | mAP50-95    | Training Time     | Inference Speed | Notes                                      |
+|--------------------|--------|------------|------------|------------|------------|------------------|----------------|--------------------------------------------|
+| YOLOv11 (Baseline) | v11    | **~0.42**  | **~0.31**  | **~0.29**  | **~0.16**  | Long             | Medium         | Best overall performance                   |
+| YOLOv10n           | v10    | ~0.41–0.42 | ~0.31      | ~0.28–0.29 | ~0.16      | Medium           | Fast           | Strong detection, efficient                |
+| YOLOv8n            | v8     | ~0.41–0.42 | ~0.31      | ~0.28–0.29 | ~0.16      | Fast             | Very fast      | Lightweight, stable training               |
+| YOLOv5n            | v5     | ~0.39–0.41 | ~0.30–0.31 | ~0.27–0.28 | ~0.15      | Slow (your case) | Fast           | Slightly weaker, older architecture        |
 
-Compared with YOLOv5n, YOLOv11n showed a clear improvement across all metrics. This is consistent with the expectation that newer YOLO architectures offer stronger feature extraction and improved handling of dense scenes and small objects. The difference is especially important for VisDrone, where many targets occupy only a small portion of the image and are often affected by clutter or occlusion. YOLOv8n and YOLOv9t remained competitive and would still be reasonable choices for applications where computational efficiency is a priority. Although it may require more training time than smaller earlier models, the increase in detection quality makes up for any trade-offs.
+Across all evaluated models, performance was relatively similar, with precision values ranging from approximately 0.39 to 0.42 and recall values around 0.30–0.31. The best overall results were achieved by YOLOv11, which slightly outperformed the other models in both mAP50 (~0.29) and mAP50-95 (~0.16). However, the performance gap between YOLOv11, YOLOv10n, and YOLOv8n was minimal, indicating that all three models are operating near a similar performance ceiling on the VisDrone dataset.
 
-Overall, the comparison supports the selection of YOLOv11n as the strongest model in this project. It delivered the best overall balance between precision, recall, and mAP performance, while remaining practical enough for structured experimentation and analysis.
+## Model Comparison
+
+YOLOv10n and YOLOv8n demonstrated nearly identical performance across all evaluation metrics. Both models achieved comparable precision, recall, and mAP values, suggesting that architectural improvements in YOLOv10 do not significantly impact detection performance for this dataset. However, YOLOv10n benefits from improved efficiency and faster inference, making it more suitable for real-time applications. YOLOv8n also performed consistently well, with stable training curves and fast convergence. Its lightweight design allows for very fast inference, making it a strong baseline model for edge or resource-constrained environments. YOLOv5n produced slightly lower performance across all metrics. While still competitive, it showed reduced mAP and precision compared to newer versions. Additionally, training time was longer in this case, indicating lower efficiency relative to more recent YOLO architectures.
+
+From the confusion matrices and precision-recall curves, it is evident that model performance varies significantly across object classes. Larger and more distinct objects such as cars achieved high detection accuracy (mAP > 0.7), while smaller or less frequent classes such as bicycles, tricycles, and awning-tricycles showed poor performance. A major issue across all models is the high number of false negatives, as indicated by strong predictions in the background class. This suggests that many objects are not being detected at all, particularly smaller objects. Additionally, confusion between similar classes (e.g., pedestrian vs. people, car vs. van) further reduces classification accuracy.
+
+## Key Limitations
+
+The primary limitation observed is dataset imbalance and small object detection difficulty. Classes such as cars dominate the dataset, while others have significantly fewer instances. This imbalance leads to biased learning and reduced performance on minority classes. Furthermore, the small size of many objects in the VisDrone dataset makes detection inherently challenging, limiting overall recall.
 
 ## Conclusion
+
+Although YOLOv11 achieved the best overall performance, the improvement over YOLOv10n and YOLOv8n is marginal. This indicates that increasing model complexity alone does not significantly improve results. Instead, performance is largely constrained by dataset characteristics, particularly class imbalance and object scale.
+
+For practical applications, YOLOv10n or YOLOv8n may be preferred due to their faster inference speeds and comparable accuracy. Future improvements should focus on data augmentation, class balancing, and techniques for improving small object detection rather than relying solely on newer model architectures.
 
 This project demonstrates a complete end-to-end object detection pipeline using YOLOv11, including:
 
