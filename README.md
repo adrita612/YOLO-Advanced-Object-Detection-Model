@@ -1,101 +1,174 @@
 # YOLO-Advanced-Object-Detection-Model
 You Only Look For Once is an interative model that uses deep learning features to detect objects, a vital simulation used in smart cities
 
+# YOLO Object Detection Project (VisDrone)
+
+## Overview
+This project implements a YOLOv8-based object detection model trained on the VisDrone dataset. The goal is to evaluate model performance under different training configurations and understand how factors such as training duration and image resolution impact detection accuracy in dense, real-world environments.
+
+---
+
+## Contributions
+
 Throughout this project, I was actively involved in both the technical implementation and workflow optimization of the YOLO-based object detection model. My main contributions included:
-Setting up the dataset pipeline using the VISDrone dataset, including organizing image and label directories into the correct YOLO format
-Configuring and training the YOLO model (Ultralytics framework), including tuning parameters such as batch size, confidence thresholds, and epochs
-Running model inference and evaluation, interpreting outputs, and validating detection performance
-Debugging file path issues and dataset inconsistencies, particularly when transitioning between environments
-Managing the development workflow across platforms, specifically moving from local development (VS Code) to cloud-based training
-A key contribution I made to this project was adapting the workflow to address hardware limitations. Since my laptop only supports CPU-based processing, training the YOLO model locally was extremely slow and not practical for the scope of this project. To resolve this, I transferred the training to Google Collab, where I could take advantage of GPU processing. This shift was significant in completing Part III (training) and Part IV (evaluation and prediction).
-However, this transition introduced several additional challenges. Moving between a local Windows environment and Collab’s Linux-based system required careful restructuring of file paths and directories. Small inconsistencies in dataset organization often resulted in errors such as missing files during training or prediction. Managing the VISDrone dataset in a cloud environment also required extra steps, including uploading, extracting, and verifying the dataset structure before it could be used effectively.
-Results for each experimental procedure and workflow of the YOLO model are outlined below. 
-Baseline Results
-Training behaviour-> Loss Curve
-Both training and validation losses decrease smoothly, indicating stable convergence and effective learning.
 
-Overfitting/underfitting
-The similarity between training and validation loss indicates minimal overfitting and good generalization to unseen data.
+- Setting up the dataset pipeline using the VisDrone dataset, including organizing image and label directories into the correct YOLO format  
+- Configuring and training the YOLO model (Ultralytics framework), including tuning parameters such as batch size, confidence thresholds, and epochs  
+- Running model inference and evaluation, interpreting outputs, and validating detection performance  
+- Debugging file path issues and dataset inconsistencies, particularly when transitioning between environments  
+- Managing the development workflow across platforms, specifically moving from local development (VS Code) to cloud-based training  
 
-MaP (Performance Metrics)
-Precision ≈ 0.41
-Recall ≈ 0.30
-mAP@50 ≈ 0.30
-mAP@50-95 ≈ 0.17
+### Workflow Adaptation
 
-Metric
-Meaning
-Precision (0.41)
-Moderate false positives
-Recall (0.30)
-Missing some objects
-mAP50 (0.30)
-Decent baseline
-mAP50-95 (0.17)
-Hard dataset (normal)
+A key contribution I made to this project was adapting the workflow to address hardware limitations. Since my laptop only supports CPU-based processing, training the YOLO model locally was extremely slow and not practical for the scope of this project. To resolve this, I transitioned the training process to Google Colab, where I could take advantage of GPU acceleration. This shift was essential for efficiently completing Part III (training) and Part IV (evaluation and prediction).
 
+---
 
-The model achieves moderate detection performance, with mAP@50 around 0.30, which is reasonable given the complexity and density of the VisDrone dataset.
+## Challenges
 
-Convergence Behaviour
+The project involved several practical and technical challenges:
 
-No plateau so model did not fully converge
+### Hardware Limitations
+- Local CPU training was too slow for deep learning workloads  
+- Required migration to Google Colab for GPU acceleration  
 
-Class-wise Performance 
-Strong classes:
-car (~0.73 AP) ← VERY GOOD
-bus (~0.39)
-van (~0.33)
-Weak classes:
-bicycle (~0.06)
-awning-tricycle (~0.10)
-tricycle (~0.20)
-The training and validation loss curves show a consistent downward trend, indicating stable convergence of the model. There is no significant gap between training and validation loss, suggesting that the model does not suffer from overfitting and generalizes well to unseen data.
-Additionally, the model has not fully converged, as both loss and performance metrics continue to improve at later epochs. This suggests that further training could improve performance.
-The absence of overfitting can be attributed to the large dataset size and the complexity of the VisDrone dataset, which contains dense scenes and small objects. However, performance limitations arise due to class imbalance and small object detection challenges, which affect recall and accuracy for minority classes.
-Part III: Increasing Epoch Testing 
+### Environment Transition Issues
+- File path inconsistencies between Windows and Linux systems  
+- Dataset not being detected due to minor directory structure errors  
+- Required restructuring dataset paths and YAML configuration  
 
-I opted to increase the epoch count from 30 to 50 as the performance metrics from the initial results did not yet reach a plateau. 
+### Dataset Challenges (VisDrone)
+- High object density (many objects per image)  
+- Very small object sizes due to aerial perspective  
+- Occlusion and overlapping objects  
+- Background clutter and varying lighting conditions  
+- Class imbalance across object categories  
+- Inconsistent annotation quality in some cases  
 
-After Increasing Epoch from 30 -> 50 
+### Model Training Challenges
+- Hyperparameter tuning required trial and error  
+- Limited runtime on Colab required efficient training decisions  
+- Difficulty balancing precision vs recall  
+- Debugging incorrect predictions and missing detections  
 
-Increasing the number of training epochs from 30 to 50 resulted in an improvement in overall detection performance, with mAP@50 increasing from approximately 0.30 to 0.325 and mAP@50-95 improving from 0.17 to 0.186. Recall also increased, indicating that the model was able to detect more objects. However, precision decreased slightly, suggesting an increase in false positive detections. This indicates a trade-off between recall and precision, where the model becomes more sensitive but less selective. Overall, the results suggest that the model had not fully converged at 30 epochs and benefited from additional training.
+---
 
-However, it can be seen that the metrics for performance have more variability than before. 	This would indicate that precision has been lost or efficiency of the model needs to be improved. This will be further evaluated in Part IV: Experimental Training. 
-Part IV: Increasing image size to 800
+## Baseline Results
 
-In Part IV, the input image size was increased from 640 to 800 while keeping the rest of the training setup unchanged. This improvement was motivated by the VisDrone dataset’s small-object and dense-scene characteristics. The larger image size improved all major metrics, including precision, recall, mAP@50, and mAP@50-95. This suggests that increasing input resolution helped the model capture more detail and improved detection performance, especially for smaller targets.
+### Training Behaviour
+- Training and validation losses decreased smoothly  
+- Indicates stable convergence and effective learning  
 
+### Overfitting / Underfitting
+- Minimal gap between training and validation loss  
+- Suggests good generalization and minimal overfitting  
 
-Run
-Setting
-Precision
-Recall
-mAP50
-mAP50-95
-Baseline
-30 epochs, 640
-~0.41
-~0.30
-~0.30
-~0.17
-Part III
-50 epochs, 640
-~0.34
-~0.32
-~0.325
-~0.186
-Part IV
-50 epochs, 800
-~0.472
-~0.373
-~0.378
-~0.224
+### Performance Metrics
 
+| Metric        | Value  | Meaning                  |
+|--------------|--------|--------------------------|
+| Precision     | 0.41   | Moderate false positives |
+| Recall        | 0.30   | Missing some objects     |
+| mAP@50        | 0.30   | Decent baseline          |
+| mAP@50-95     | 0.17   | Difficult dataset        |
 
+The model achieves moderate detection performance, which is reasonable given the complexity of the dataset.
 
-Part V: YOLO Model Comparison 
-The YOLOv8 model was evaluated using the VisDrone validation dataset. The model successfully detected multiple object classes including pedestrians, vehicles (cars, vans, trucks), and bicycles across dense urban scenes.
-The prediction outputs show that the model is capable of detecting a high number of objects per image, which is expected given the complexity and density of the VisDrone Dataset. For example, individual images contained detections of over 50 vehicles along with multiple pedestrians simultaneously.
-Key findings indicate that increasing image size plays a significant role in improving object detection performance during training. However, the VisDrone image size used in this model was limited, and a real-world application would likely involve larger-scale training with higher-resolution data. Despite this limitation, the project effectively demonstrates the general capabilities of a YOLO-based object detection system.
+---
 
+## Convergence Behaviour
+
+- Model did not fully converge (no plateau observed)  
+- Performance metrics continued improving in later epochs  
+
+---
+
+## Class-wise Performance
+
+### Strong Classes
+- Car (~0.73 AP) ← Very strong  
+- Bus (~0.39)  
+- Van (~0.33)  
+
+### Weak Classes
+- Bicycle (~0.06)  
+- Awning-tricycle (~0.10)  
+- Tricycle (~0.20)  
+
+Performance limitations are mainly due to:
+- Small object detection difficulty  
+- Class imbalance  
+
+---
+
+## Part III: Increasing Epochs (30 → 50)
+
+To improve performance, the number of epochs was increased from 30 to 50.
+
+### Results
+- mAP@50 increased: **0.30 → 0.325**  
+- mAP@50-95 increased: **0.17 → 0.186**  
+- Recall increased (more objects detected)  
+- Precision slightly decreased (more false positives)  
+
+### Interpretation
+- Model had not fully converged at 30 epochs  
+- Additional training improved detection capability  
+- Trade-off observed between recall and precision  
+
+However, performance metrics showed increased variability, suggesting that model efficiency may require further optimization.
+
+---
+
+## Part IV: Increasing Image Size (640 → 800)
+
+The input image size was increased from 640 to 800 to better capture small objects.
+
+### Results
+- Improved precision, recall, and mAP metrics  
+- Better detection of small and dense objects  
+
+### Experimental Results
+
+| Run        | Setting            | Precision | Recall | mAP50 | mAP50-95 |
+|------------|--------------------|----------|--------|-------|-----------|
+| Baseline   | 30 epochs, 640     | ~0.41    | ~0.30  | ~0.30 | ~0.17     |
+| Part III   | 50 epochs, 640     | ~0.34    | ~0.32  | ~0.325| ~0.186    |
+| Part IV    | 50 epochs, 800     | ~0.472   | ~0.373 | ~0.378| ~0.224    |
+
+### Interpretation
+Increasing image resolution significantly improved detection performance, particularly for small objects, which are common in the VisDrone dataset.
+
+---
+
+## Part V: Model Evaluation
+
+The YOLOv8 model was evaluated on the VisDrone validation dataset.
+
+### Observations
+- Successfully detected multiple object classes (vehicles, pedestrians, bicycles)  
+- Handled dense urban scenes effectively  
+- Detected high object counts per image  
+
+Example:
+- Over 50 vehicles detected in a single image along with multiple pedestrians  
+
+### Key Findings
+- Increasing image size significantly improves detection performance  
+- Dataset complexity limits overall accuracy  
+- Model performance is strongly influenced by object scale and density  
+
+Although the dataset resolution used in this project was limited, real-world applications would benefit from higher-resolution training and larger-scale datasets.
+
+---
+
+## Conclusion
+
+This project demonstrates a complete end-to-end object detection pipeline using YOLOv8, including:
+
+- Dataset preparation  
+- Model training and tuning  
+- Performance evaluation  
+- Workflow optimization under hardware constraints  
+
+Beyond model training, the project highlights real-world challenges such as dataset complexity, computational limitations, and system integration. Adapting to these constraints and building a functional pipeline was a key part of the learning experience and reflects practical engineering problem-solving in machine learning applications.
