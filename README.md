@@ -163,6 +163,8 @@ Although the dataset resolution used in this project was limited, real-world app
 
 ## Part V: Multi-Version YOLO Comparison
 
+*Note resuls can be found in the folder "Part V Results"
+
 To place the final YOLOv11n model in a broader extent, a comparative evaluation was performed against other YOLO versions commonly used for object detection. The YOLOv11n results below are taken from the final experimental configuration in this project (50 epochs, image size 800). The remaining rows are comparison values included to demonstrate the expected comparative analysis structure.
 
 ### Quantitative Comparison Table
