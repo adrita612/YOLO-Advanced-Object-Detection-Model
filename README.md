@@ -138,9 +138,6 @@ The input image size was increased from 640 to 800 to better capture small objec
 Increasing image resolution significantly improved detection performance, particularly for small objects, which are common in the VisDrone dataset.
 
 ---
-
-## Part V: Model Evaluation
-
 The YOLOv11 model was evaluated on the VisDrone validation dataset.
 
 ### Observations
