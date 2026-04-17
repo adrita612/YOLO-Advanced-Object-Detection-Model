@@ -1,8 +1,8 @@
 # YOLO-Advanced-Object-Detection-Model
-You Only Look For Once is an interative model that uses deep learning features to detect objects, a vital simulation used in smart cities
+You Only Look For Once is an interative model that uses deep learning features to detect objects, a vital simulation used in smart cities and various applications. 
 
 ## Overview
-This project implements a YOLOv8-based object detection model trained on the VisDrone dataset. The goal is to evaluate model performance under different training configurations and understand how factors such as training duration and image resolution impact detection accuracy in dense, real-world environments.
+This project implements a YOLOv11-based object detection model trained on the VisDrone dataset. The goal is to evaluate model performance under different training configurations and understand how factors such as training duration and image resolution impact detection accuracy in dense, real-world environments.
 
 ---
 
@@ -11,14 +11,14 @@ This project implements a YOLOv8-based object detection model trained on the Vis
 Throughout this project, I was actively involved in both the technical implementation and workflow optimization of the YOLO-based object detection model. My main contributions included:
 
 - Setting up the dataset pipeline using the VisDrone dataset, including organizing image and label directories into the correct YOLO format  
-- Configuring and training the YOLO model (Ultralytics framework), including tuning parameters such as batch size, confidence thresholds, and epochs  
+- Configuring and training the YOLO model (Ultralytics framework library), including tuning parameters such as batch size, thresholds, image size, and epochs training size
 - Running model inference and evaluation, interpreting outputs, and validating detection performance  
 - Debugging file path issues and dataset inconsistencies, particularly when transitioning between environments  
 - Managing the development workflow across platforms, specifically moving from local development (VS Code) to cloud-based training  
 
 ### Workflow Adaptation
 
-A key contribution I made to this project was adapting the workflow to address hardware limitations. Since my laptop only supports CPU-based processing, training the YOLO model locally was extremely slow and not practical for the scope of this project. To resolve this, I transitioned the training process to Google Collab, where I could take advantage of GPU processing. This shift was essential for efficiently completing Part III (training) and Part IV (evaluation and prediction).
+A key contribution I made to this project was adapting the workflow to address hardware limitations. Since my laptop only supports CPU-based processing, training the YOLO model locally was extremely slow and not practical for the scope of this project. To resolve this, I transitioned the training process to Google Collab, where I could take advantage of GPU background. This shift was essential for efficiently completing Part III (training) and Part IV (comparitive analysis).
 
 ---
 
@@ -45,7 +45,7 @@ The project involved several practical and technical challenges:
 
 ### Model Training Challenges
 - Hyperparameter tuning required trial and error  
-- Limited runtime on Colab required efficient training decisions  
+- Limited runtime on Collab required efficient training decisions  
 - Difficulty balancing precision vs recall  
 - Debugging incorrect predictions and missing detections  
 
@@ -84,7 +84,7 @@ The model achieves moderate detection performance, which is reasonable given the
 ## Class-wise Performance
 
 ### Strong Classes
-- Car (~0.73 AP) ← Very strong  
+- Car (~0.73 AP) ← Resulted very strong! 
 - Bus (~0.39)  
 - Van (~0.33)  
 
@@ -93,13 +93,15 @@ The model achieves moderate detection performance, which is reasonable given the
 - Awning-tricycle (~0.10)  
 - Tricycle (~0.20)  
 
-Performance limitations are mainly due to:
+Performance limitations may be due to:
 - Small object detection difficulty  
 - Class imbalance  
 
 ---
 
 ## Part III: Increasing Epochs (30 → 50)
+
+*Note the zip file can be downloaded in "Part III Results"
 
 To improve performance, the number of epochs was increased from 30 to 50.
 
@@ -119,6 +121,8 @@ However, performance metrics showed increased variability, suggesting that model
 ---
 
 ## Part IV: Increasing Image Size (640 → 800)
+
+*Note results can be found in "Results Part IV"
 
 The input image size was increased from 640 to 800 to better capture small objects.
 
@@ -141,7 +145,7 @@ Increasing image resolution significantly improved detection performance, partic
 The YOLOv11 model was evaluated on the VisDrone validation dataset.
 
 ### Observations
-- Successfully detected multiple object classes (vehicles, pedestrians, bicycles)  
+- Successfully improved detected multiple of object classes (vehicles, pedestrians, bicycles)  
 - Handled dense urban scenes effectively  
 - Detected high object counts per image  
 
@@ -159,7 +163,7 @@ Although the dataset resolution used in this project was limited, real-world app
 
 ## Part V: Multi-Version YOLO Comparison
 
-To place the final YOLOv11n model in a broader context, a comparative evaluation was performed against other YOLO versions commonly used for object detection. The YOLOv11n results below are taken from the final experimental configuration in this project (50 epochs, image size 800). The remaining rows are comparison values included to demonstrate the expected report format and comparative analysis structure.
+To place the final YOLOv11n model in a broader extent, a comparative evaluation was performed against other YOLO versions commonly used for object detection. The YOLOv11n results below are taken from the final experimental configuration in this project (50 epochs, image size 800). The remaining rows are comparison values included to demonstrate the expected comparative analysis structure.
 
 ### Quantitative Comparison Table
 
